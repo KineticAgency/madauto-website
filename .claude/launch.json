@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "madauto-dev",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "C:\\Users\\Goca\\Desktop\\MADAuto website\\dev.cmd"],
+      "port": 3000
+    }
+  ]
+}

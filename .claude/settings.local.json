@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm -v)",
+      "PowerShell(Get-Command node -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Command npm -ErrorAction SilentlyContinue)",
+      "PowerShell(& \"C:\\\\Program Files\\\\nodejs\\\\node.exe\" -v)",
+      "PowerShell(& \"C:\\\\Program Files\\\\nodejs\\\\npm.cmd\" -v)",
+      "Bash(rm -rf src/app/usluge/tehnicki-pregled src/app/usluge/auto-servis)",
+      "Bash(mkdir -p \"src/app/usluge/[slug]\" src/app/zakazivanje)"
+    ]
+  }
+}
