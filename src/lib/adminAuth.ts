@@ -5,8 +5,8 @@ function getSecret() {
   return process.env.ADMIN_SESSION_SECRET ?? "madauto-dev-secret-change-me";
 }
 
-function toBase64Url(bytes: ArrayBuffer) {
-  const view = new Uint8Array(bytes);
+function toBase64Url(bytes: ArrayBuffer | Uint8Array) {
+  const view = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
   let binary = "";
   for (let i = 0; i < view.length; i++) {
     binary += String.fromCharCode(view[i]);
