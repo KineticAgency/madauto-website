@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import Logo from "./Logo";
 import { companyInfo } from "@/lib/data";
 
 const navLinks = [
@@ -32,17 +33,18 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+      className={`sticky top-0 z-50 w-full border-b border-white/5 transition-all duration-300 ${
         scrolled
           ? "bg-primary-900/95 shadow-lg backdrop-blur"
           : "bg-primary-900"
       }`}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+      <div className="h-[3px] w-full bg-gradient-to-r from-accent-600 via-accent-500 to-accent-600" />
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5">
         <Link href="/" className="flex flex-col leading-tight">
-          <span className="text-xl font-bold text-accent-400">MADAuto</span>
+          <Logo iconClassName="h-11 w-auto" />
           <span
-            className={`text-[11px] text-primary-200 transition-all duration-300 ${
+            className={`text-xs text-primary-200 transition-all duration-300 ${
               scrolled ? "max-h-0 opacity-0" : "max-h-4 opacity-100"
             }`}
           >
@@ -50,7 +52,7 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav className="hidden gap-6 text-sm font-medium text-primary-100 md:flex">
+        <nav className="hidden gap-8 text-base font-medium text-primary-100 md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -64,16 +66,16 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-4 md:flex">
+        <div className="hidden items-center gap-5 md:flex">
           <a
             href={`tel:${companyInfo.phoneHref}`}
-            className="text-sm font-semibold text-primary-100 hover:text-white"
+            className="text-[15px] font-semibold text-primary-100 hover:text-white"
           >
             {companyInfo.phone}
           </a>
           <Link
             href="/zakazivanje"
-            className="rounded-md bg-accent-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-accent-600"
+            className="rounded-md bg-accent-500 px-5 py-2.5 text-[15px] font-bold text-white shadow-md shadow-accent-500/30 transition-all hover:-translate-y-0.5 hover:bg-accent-600 hover:shadow-lg hover:shadow-accent-500/40"
           >
             Zakaži termin
           </Link>

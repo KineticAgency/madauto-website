@@ -16,15 +16,22 @@ export default function AboutPage() {
         <RatingBadge />
       </div>
 
-      <p className="mt-6 text-gray-600">
-        MADAuto je stanica za tehnički pregled vozila i auto servis sa sedištem u Nišu,
-        osnovana {companyInfo.founded}. godine. Preko dve decenije pružamo pouzdane usluge
-        tehničkog pregleda, registracije i održavanja vozila, uz stručan tim i savremenu
-        dijagnostičku opremu.
+      <p className="mt-8 text-xl font-bold leading-snug text-primary-900 sm:text-2xl">
+        Tehnički pregled i servis vozila zahtevaju poverenje —{" "}
+        <span className="text-accent-500">mi ga gradimo već {new Date().getFullYear() - companyInfo.founded} godine.</span>
+      </p>
+
+      <p className="mt-5 text-gray-600">
+        Od {companyInfo.founded}. godine rešavamo konkretan problem s kojim se suočava svaki
+        vozač: dug proces tehničkog pregleda i servisa, praćen neizvesnošću oko troškova i
+        kvaliteta izvedene usluge. Bez čekanja u redu, bez nejasnih dijagnoza i bez iznenađenja
+        na računu — samo precizno objašnjenje svake izvršene usluge.
       </p>
       <p className="mt-4 text-gray-600">
-        Naš cilj je da svakom klijentu obezbedimo brzu, transparentnu i profesionalnu uslugu —
-        jer bezbednost na putu počinje ispravnim vozilom.
+        Tehnički pregled, registracija, dijagnostika i servis kočionog sistema dostupni su na
+        jednoj adresi, kod tima kome već {new Date().getFullYear() - companyInfo.founded} godina
+        veruju vozači iz Niša i okoline. Nije potrebno obilaziti više servisa u potrazi za
+        pouzdanom uslugom — sve što vam je potrebno nalazi se na jednom mestu.
       </p>
 
       <div className="mt-8 grid gap-6 sm:grid-cols-2">

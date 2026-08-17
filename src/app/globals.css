@@ -11,3 +11,10 @@ body {
   color: var(--foreground);
   background: var(--background);
 }
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}

@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import BookingCalendar from "./BookingCalendar";
-import { timeSlots } from "@/lib/data";
 
 type BookingFormValues = {
   date: string;
@@ -15,11 +14,15 @@ type BookingFormValues = {
   notes: string;
 };
 
+type Slot = { time: string; available: boolean };
+
 const vehicleTypes = ["Putničko vozilo", "Teretno vozilo", "Motocikl"];
 
 export default function BookingForm() {
   const [submitted, setSubmitted] = useState<BookingFormValues | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [slots, setSlots] = useState<Slot[]>([]);
+  const [loadingSlots, setLoadingSlots] = useState(false);
   const today = new Date();
 
   const {
@@ -28,6 +31,7 @@ export default function BookingForm() {
     control,
     watch,
     reset,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<BookingFormValues>({
     defaultValues: {
@@ -43,6 +47,30 @@ export default function BookingForm() {
 
   const selectedDate = watch("date");
 
+  useEffect(() => {
+    if (!selectedDate) {
+      setSlots([]);
+      return;
+    }
+    let cancelled = false;
+    setLoadingSlots(true);
+    setValue("timeSlot", "");
+    fetch(`/api/available-slots?date=${selectedDate}`)
+      .then((res) => (res.ok ? res.json() : Promise.reject()))
+      .then((data) => {
+        if (!cancelled) setSlots(data.slots ?? []);
+      })
+      .catch(() => {
+        if (!cancelled) setSlots([]);
+      })
+      .finally(() => {
+        if (!cancelled) setLoadingSlots(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedDate, setValue]);
+
   const onSubmit = async (values: BookingFormValues) => {
     setSubmitError(null);
     try {
@@ -51,7 +79,18 @@ export default function BookingForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       });
-      if (!res.ok) throw new Error("request-failed");
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        if (res.status === 409) {
+          setSubmitError(data.error ?? "Taj termin je upravo zauzet. Molimo izaberite drugi.");
+          setSlots((prev) =>
+            prev.map((s) => (s.time === values.timeSlot ? { ...s, available: false } : s))
+          );
+          setValue("timeSlot", "");
+          return;
+        }
+        throw new Error("request-failed");
+      }
       setSubmitted(values);
       reset();
     } catch {
@@ -120,21 +159,50 @@ export default function BookingForm() {
 
       <div className="flex flex-col gap-4">
         <div>
-          <label htmlFor="timeSlot" className="mb-1 block text-sm font-semibold text-primary-900">
+          <label className="mb-1 block text-sm font-semibold text-primary-900">
             Vremenski slot
           </label>
-          <select
-            id="timeSlot"
-            {...register("timeSlot", { required: "Molimo izaberite vreme." })}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
-          >
-            <option value="">Izaberite vreme</option>
-            {timeSlots.map((slot) => (
-              <option key={slot} value={slot}>
-                {slot}
-              </option>
-            ))}
-          </select>
+          <input type="hidden" {...register("timeSlot", { required: "Molimo izaberite vreme." })} />
+
+          {!selectedDate && (
+            <p className="rounded-md border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-500">
+              Prvo izaberite datum.
+            </p>
+          )}
+          {selectedDate && loadingSlots && (
+            <p className="rounded-md border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-500">
+              Učitavanje termina...
+            </p>
+          )}
+          {selectedDate && !loadingSlots && slots.length === 0 && (
+            <p className="rounded-md border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-500">
+              Nema definisanih termina za odabrani dan.
+            </p>
+          )}
+          {selectedDate && !loadingSlots && slots.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {slots.map((slot) => {
+                const isSelected = watch("timeSlot") === slot.time;
+                return (
+                  <button
+                    key={slot.time}
+                    type="button"
+                    disabled={!slot.available}
+                    onClick={() => setValue("timeSlot", slot.time, { shouldValidate: true })}
+                    className={`rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
+                      !slot.available
+                        ? "cursor-not-allowed bg-gray-100 text-gray-400 line-through"
+                        : isSelected
+                        ? "bg-accent-500 text-white"
+                        : "bg-primary-50 text-primary-800 hover:bg-primary-100"
+                    }`}
+                  >
+                    {slot.time}
+                  </button>
+                );
+              })}
+            </div>
+          )}
           {errors.timeSlot && (
             <p className="mt-1 text-sm text-red-600">{errors.timeSlot.message}</p>
           )}

@@ -5,6 +5,8 @@ export type Service = {
   longDesc: string;
   category: "pregled" | "servis";
   bullets: string[];
+  heroImage: string;
+  heroImageAlt: string;
 };
 
 export const services: Service[] = [
@@ -21,6 +23,9 @@ export const services: Service[] = [
       "Merenje emisije izduvnih gasova",
       "Izdavanje zapisnika o tehničkoj ispravnosti",
     ],
+    heroImage:
+      "https://images.unsplash.com/photo-1541846476-8e81bf093904?q=80&w=1800&auto=format&fit=crop",
+    heroImageAlt: "Crveni automobil u servisnoj garaži",
   },
   {
     slug: "registracija-vozila",
@@ -35,6 +40,9 @@ export const services: Service[] = [
       "Izdavanje saobraćajne dozvole",
       "Obaveštenje o isteku registracije",
     ],
+    heroImage:
+      "https://images.unsplash.com/photo-1632405862117-236585cfb757?q=80&w=1800&auto=format&fit=crop",
+    heroImageAlt: "Automobil parkiran u garaži pripremljen za registraciju",
   },
   {
     slug: "auto-dijagnostika",
@@ -49,6 +57,9 @@ export const services: Service[] = [
       "Dijagnostika motora i menjača",
       "Provera elektronskih sistema vozila",
     ],
+    heroImage:
+      "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=1800&auto=format&fit=crop",
+    heroImageAlt: "Detalj motora vozila tokom dijagnostike",
   },
   {
     slug: "servis-kocionog-sistema",
@@ -63,6 +74,9 @@ export const services: Service[] = [
       "Merenje kočione sile na valjcima",
       "Provera ručne (parking) kočnice",
     ],
+    heroImage:
+      "https://images.unsplash.com/photo-1770834807387-820280f8270b?q=80&w=1800&auto=format&fit=crop",
+    heroImageAlt: "Detalj crvene kočione čeljusti na točku vozila",
   },
 ];
 

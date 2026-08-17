@@ -69,19 +69,6 @@ export default function KontaktPage() {
               Otvori u Google Maps →
             </a>
           </div>
-
-          <div className="group relative aspect-[4/3] overflow-hidden rounded-lg shadow-md">
-            <img
-              src="/images/fasada.jpg"
-              alt="Fasada MADAuto stanice za tehnički pregled"
-              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary-900/90 via-primary-900/20 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 p-5">
-              <p className="text-lg font-bold text-white">Posetite nas</p>
-              <p className="text-sm text-primary-100">{companyInfo.address}</p>
-            </div>
-          </div>
         </div>
 
         <div className="rounded-lg border border-primary-100 p-6">

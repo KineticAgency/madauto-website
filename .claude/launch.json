@@ -7,5 +7,6 @@
       "runtimeArgs": ["/c", "C:\\Users\\Goca\\Desktop\\MADAuto website\\dev.cmd"],
       "port": 3000
     }
-  ]
+  ],
+  "autoVerify": false
 }

@@ -7,7 +7,9 @@
       "PowerShell(& \"C:\\\\Program Files\\\\nodejs\\\\node.exe\" -v)",
       "PowerShell(& \"C:\\\\Program Files\\\\nodejs\\\\npm.cmd\" -v)",
       "Bash(rm -rf src/app/usluge/tehnicki-pregled src/app/usluge/auto-servis)",
-      "Bash(mkdir -p \"src/app/usluge/[slug]\" src/app/zakazivanje)"
+      "Bash(mkdir -p \"src/app/usluge/[slug]\" src/app/zakazivanje)",
+      "WebSearch",
+      "mcp__d642b428-9ef5-45f3-ad7f-7cd2a17a6f4f__search_threads"
     ]
   }
 }

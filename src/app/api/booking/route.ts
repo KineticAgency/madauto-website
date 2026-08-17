@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { companyInfo } from "@/lib/data";
+import { ensureSchema, pool } from "@/lib/db";
 
 type BookingPayload = {
   date: string;
@@ -38,13 +39,29 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Nepotpuni podaci." }, { status: 400 });
   }
 
+  try {
+    await ensureSchema();
+    await pool.query(
+      `INSERT INTO bookings (booking_date, booking_time, vehicle_type, full_name, phone, email, notes)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+      [body.date, body.timeSlot, body.vehicleType, body.fullName, body.phone, body.email, body.notes ?? ""]
+    );
+  } catch (error) {
+    const pgError = error as { code?: string };
+    if (pgError.code === "23505") {
+      return NextResponse.json(
+        { error: "Taj termin je upravo zauzet. Molimo izaberite drugi." },
+        { status: 409 }
+      );
+    }
+    console.error("Greška pri upisu termina u bazu:", error);
+    return NextResponse.json({ error: "Zakazivanje trenutno nije moguće." }, { status: 502 });
+  }
+
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.error("RESEND_API_KEY nije podešen — email nije poslat.");
-    return NextResponse.json(
-      { error: "Slanje email-a trenutno nije podešeno na serveru." },
-      { status: 500 }
-    );
+    return NextResponse.json({ ok: true, emailSent: false });
   }
 
   const resend = new Resend(apiKey);
@@ -88,6 +105,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("Greška pri slanju email-a za zakazivanje:", error);
-    return NextResponse.json({ error: "Slanje email-a nije uspelo." }, { status: 502 });
+    return NextResponse.json({ ok: true, emailSent: false });
   }
 }
