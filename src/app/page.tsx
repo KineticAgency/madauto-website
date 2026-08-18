@@ -7,27 +7,37 @@ export default function HomePage() {
   return (
     <div>
       <section className="relative overflow-hidden bg-primary-900 py-24 text-white sm:py-28">
-        <img
-          src="/images/fasada-nocu.png"
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-          style={{
-            objectPosition: "center 25%",
-            filter: "grayscale(35%) brightness(0.95) contrast(1.1) saturate(1.2)",
-          }}
-        />
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(15,23,42,0.55) 0%, rgba(15,23,42,0.4) 35%, rgba(15,23,42,0.55) 65%, rgba(15,23,42,0.85) 100%)",
-          }}
-        />
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{ background: "rgba(220,38,38,0.12)", mixBlendMode: "color" }}
-        />
+        <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[42%] lg:block">
+          <img
+            src="/images/fasada-nocu.png"
+            alt=""
+            aria-hidden="true"
+            className="h-full w-full object-cover"
+            style={{
+              objectPosition: "center 20%",
+              filter: "grayscale(25%) brightness(1) contrast(1.1) saturate(1.25)",
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(90deg, #0f172a 0%, rgba(15,23,42,0.75) 12%, rgba(15,23,42,0.15) 35%, transparent 55%)",
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(15,23,42,0.45) 0%, transparent 25%, transparent 70%, rgba(15,23,42,0.75) 100%)",
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{ background: "rgba(220,38,38,0.1)", mixBlendMode: "color" }}
+          />
+        </div>
+
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.07]"
           style={{
@@ -36,26 +46,26 @@ export default function HomePage() {
           }}
         />
         <div
-          className="pointer-events-none absolute left-1/2 top-0 h-[520px] w-[900px] -translate-x-1/2 -translate-y-1/3 rounded-full opacity-30 blur-3xl"
+          className="pointer-events-none absolute left-1/4 top-0 h-[520px] w-[900px] -translate-x-1/2 -translate-y-1/3 rounded-full opacity-30 blur-3xl"
           style={{ background: "radial-gradient(circle, #dc2626 0%, transparent 70%)" }}
         />
 
-        <div className="relative mx-auto max-w-6xl px-4 text-center">
+        <div className="relative mx-auto max-w-6xl px-4 text-center lg:max-w-none lg:pr-[38%] lg:text-left">
           <span className="inline-flex items-center gap-2 rounded-full border border-accent-500/40 bg-accent-500/10 px-5 py-2 text-sm font-semibold uppercase tracking-wider text-accent-400">
             Stanica za tehnički pregled · Niš
           </span>
 
-          <h1 className="mx-auto mt-7 max-w-4xl text-6xl font-black leading-[1.03] tracking-tight sm:text-7xl">
+          <h1 className="mx-auto mt-7 max-w-4xl text-6xl font-black leading-[1.03] tracking-tight sm:text-7xl lg:mx-0">
             Tehnički pregled i servis
             <br />
             <span className="text-accent-500">kojem Niš veruje.</span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-xl text-primary-200">
+          <p className="mx-auto mt-6 max-w-2xl text-xl text-primary-200 lg:mx-0">
             Brzo, stručno i bez čekanja — vaše vozilo u pouzdanim rukama.
           </p>
 
-          <div className="mt-9 flex flex-wrap justify-center gap-4">
+          <div className="mt-9 flex flex-wrap justify-center gap-4 lg:justify-start">
             <Link
               href="/zakazivanje"
               className="rounded-md bg-accent-500 px-8 py-3.5 text-base font-bold text-white shadow-lg shadow-accent-500/30 transition-all hover:-translate-y-0.5 hover:bg-accent-600 hover:shadow-xl hover:shadow-accent-500/40"
@@ -70,7 +80,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="mx-auto mt-14 grid max-w-3xl grid-cols-1 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10 sm:grid-cols-3">
+          <div className="mx-auto mt-14 grid max-w-3xl grid-cols-1 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10 sm:grid-cols-3 lg:mx-0">
             <div className="bg-primary-900 px-6 py-5">
               <p className="text-2xl font-black text-white">
                 {new Date().getFullYear() - companyInfo.founded}+
@@ -97,6 +107,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <Testimonials />
 
       <section className="mx-auto max-w-6xl px-4 py-16">
         <div className="flex flex-wrap items-end justify-between gap-4">
@@ -160,8 +172,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <Testimonials />
     </div>
   );
 }
