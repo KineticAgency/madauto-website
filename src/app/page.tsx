@@ -55,7 +55,7 @@ export default function HomePage() {
             Stanica za tehnički pregled · Niš
           </span>
 
-          <h1 className="mx-auto mt-7 max-w-4xl text-6xl font-black leading-[1.03] tracking-tight sm:text-7xl lg:mx-0 lg:max-w-2xl lg:whitespace-nowrap lg:text-5xl xl:text-6xl">
+          <h1 className="mx-auto mt-7 max-w-4xl text-6xl font-black leading-[1.2] tracking-tight sm:text-7xl lg:mx-0 lg:max-w-2xl lg:whitespace-nowrap lg:text-5xl lg:leading-[1.25] xl:text-6xl">
             Tehnički pregled i servis
             <br />
             <span className="text-accent-500">kojem Niš veruje.</span>
