@@ -36,6 +36,16 @@ export default function HomePage() {
             className="absolute inset-0"
             style={{ background: "rgba(220,38,38,0.1)", mixBlendMode: "color" }}
           />
+          <div
+            className="absolute inset-x-0 bottom-0 h-[40%]"
+            style={{
+              background: "#dc2626",
+              mixBlendMode: "hue",
+              opacity: 0.85,
+              maskImage: "linear-gradient(180deg, transparent 0%, black 40%)",
+              WebkitMaskImage: "linear-gradient(180deg, transparent 0%, black 40%)",
+            }}
+          />
         </div>
 
         <div
@@ -55,7 +65,7 @@ export default function HomePage() {
             Stanica za tehnički pregled · Niš
           </span>
 
-          <h1 className="mx-auto mt-7 max-w-4xl text-6xl font-black leading-[1.2] tracking-tight sm:text-7xl lg:mx-0 lg:max-w-2xl lg:whitespace-nowrap lg:text-5xl lg:leading-[1.25] xl:text-6xl">
+          <h1 className="mx-auto mt-7 max-w-4xl text-6xl font-black leading-[1.35] tracking-tight sm:text-7xl lg:mx-0 lg:max-w-2xl lg:whitespace-nowrap lg:text-4xl lg:leading-[1.4] xl:text-5xl xl:leading-[1.4]">
             Tehnički pregled i servis
             <br />
             <span className="text-accent-500">kojem Niš veruje.</span>

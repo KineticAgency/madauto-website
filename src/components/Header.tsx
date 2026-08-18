@@ -42,7 +42,7 @@ export default function Header() {
       <div className="h-[3px] w-full bg-gradient-to-r from-accent-600 via-accent-500 to-accent-600" />
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5">
         <Link href="/" className="flex flex-col leading-tight">
-          <Logo iconClassName="h-11 w-auto" />
+          <Logo iconClassName="h-14 w-auto" />
           <span
             className={`text-xs text-primary-200 transition-all duration-300 ${
               scrolled ? "max-h-0 opacity-0" : "max-h-4 opacity-100"

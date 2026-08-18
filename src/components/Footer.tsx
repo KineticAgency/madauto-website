@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="bg-primary-900 text-primary-100">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:grid-cols-3">
         <div>
-          <Logo iconClassName="h-11 w-auto" />
+          <Logo iconClassName="h-14 w-auto" />
           <p className="mt-4 text-base leading-relaxed text-primary-200">
             Stanica za tehnički pregled vozila i auto servis u Nišu. Poverenje
             i bezbednost od {companyInfo.founded}. godine.
