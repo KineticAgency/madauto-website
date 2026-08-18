@@ -37,13 +37,14 @@ export default function HomePage() {
             style={{ background: "rgba(220,38,38,0.1)", mixBlendMode: "color" }}
           />
           <div
-            className="absolute inset-x-0 bottom-0 h-[40%]"
+            className="absolute inset-x-0 bottom-0 h-[58%]"
             style={{
-              backdropFilter: "blur(18px)",
-              WebkitBackdropFilter: "blur(18px)",
-              background: "rgba(15,23,42,0.55)",
-              maskImage: "linear-gradient(180deg, transparent 0%, black 35%)",
-              WebkitMaskImage: "linear-gradient(180deg, transparent 0%, black 35%)",
+              backdropFilter: "blur(28px)",
+              WebkitBackdropFilter: "blur(28px)",
+              background:
+                "linear-gradient(180deg, rgba(15,10,15,0) 0%, rgba(30,8,14,0.55) 30%, rgba(30,6,10,0.85) 60%, rgba(20,4,8,0.92) 100%)",
+              maskImage: "linear-gradient(180deg, transparent 0%, black 22%)",
+              WebkitMaskImage: "linear-gradient(180deg, transparent 0%, black 22%)",
             }}
           />
         </div>
