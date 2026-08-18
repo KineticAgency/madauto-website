@@ -11,18 +11,22 @@ export default function HomePage() {
           src="/images/fasada-nocu.png"
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-40"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
           style={{
             objectPosition: "center 25%",
-            filter: "grayscale(65%) brightness(0.6) contrast(1.15)",
+            filter: "grayscale(35%) brightness(0.95) contrast(1.1) saturate(1.2)",
           }}
         />
         <div
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "linear-gradient(180deg, rgba(15,23,42,0.88) 0%, rgba(15,23,42,0.75) 40%, rgba(15,23,42,0.93) 100%)",
+              "linear-gradient(180deg, rgba(15,23,42,0.55) 0%, rgba(15,23,42,0.4) 35%, rgba(15,23,42,0.55) 65%, rgba(15,23,42,0.85) 100%)",
           }}
+        />
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{ background: "rgba(220,38,38,0.12)", mixBlendMode: "color" }}
         />
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.07]"
