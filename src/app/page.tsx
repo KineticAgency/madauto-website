@@ -7,7 +7,7 @@ export default function HomePage() {
   return (
     <div>
       <section className="relative overflow-hidden bg-primary-900 py-24 text-white sm:py-28">
-        <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[54%] xl:block">
+        <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[46%] xl:block">
           <img
             src="/images/fasada-nocu.png"
             alt=""
@@ -35,17 +35,6 @@ export default function HomePage() {
           <div
             className="absolute inset-0"
             style={{ background: "rgba(220,38,38,0.1)", mixBlendMode: "color" }}
-          />
-          <div
-            className="absolute inset-x-0 bottom-0 h-[58%]"
-            style={{
-              backdropFilter: "blur(28px)",
-              WebkitBackdropFilter: "blur(28px)",
-              background:
-                "linear-gradient(180deg, rgba(15,10,15,0) 0%, rgba(30,8,14,0.55) 30%, rgba(30,6,10,0.85) 60%, rgba(20,4,8,0.92) 100%)",
-              maskImage: "linear-gradient(180deg, transparent 0%, black 22%)",
-              WebkitMaskImage: "linear-gradient(180deg, transparent 0%, black 22%)",
-            }}
           />
         </div>
 
