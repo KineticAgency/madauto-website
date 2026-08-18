@@ -7,29 +7,29 @@ export default function HomePage() {
   return (
     <div>
       <section className="relative overflow-hidden bg-primary-900 py-24 text-white sm:py-28">
-        <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[42%] lg:block">
+        <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[54%] xl:block">
           <img
             src="/images/fasada-nocu.png"
             alt=""
             aria-hidden="true"
             className="h-full w-full object-cover"
             style={{
-              objectPosition: "center 20%",
-              filter: "grayscale(25%) brightness(1) contrast(1.1) saturate(1.25)",
+              objectPosition: "75% 20%",
+              filter: "grayscale(10%) brightness(1.25) contrast(1.25) saturate(1.35)",
             }}
           />
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(90deg, #0f172a 0%, rgba(15,23,42,0.75) 12%, rgba(15,23,42,0.15) 35%, transparent 55%)",
+                "linear-gradient(90deg, #0f172a 0%, rgba(15,23,42,0.95) 10%, rgba(15,23,42,0.82) 20%, rgba(15,23,42,0.62) 32%, rgba(15,23,42,0.4) 44%, rgba(15,23,42,0.2) 56%, rgba(15,23,42,0.06) 68%, transparent 80%)",
             }}
           />
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(180deg, rgba(15,23,42,0.45) 0%, transparent 25%, transparent 70%, rgba(15,23,42,0.75) 100%)",
+                "linear-gradient(180deg, rgba(15,23,42,0.05) 0%, transparent 20%, transparent 70%, rgba(15,23,42,0.75) 100%)",
             }}
           />
           <div
@@ -66,7 +66,7 @@ export default function HomePage() {
             Stanica za tehnički pregled · Niš
           </span>
 
-          <h1 className="mx-auto mt-7 max-w-4xl text-6xl font-black leading-[1.03] tracking-tight sm:text-7xl lg:mx-0 lg:max-w-2xl lg:whitespace-nowrap lg:text-6xl xl:text-7xl">
+          <h1 className="mx-auto mt-7 max-w-4xl text-6xl font-black leading-[1.03] tracking-tight sm:text-7xl lg:mx-0 lg:max-w-2xl lg:whitespace-nowrap lg:text-5xl xl:text-6xl">
             Tehnički pregled i servis
             <br />
             <span className="text-accent-500">kojem Niš veruje.</span>
@@ -91,22 +91,13 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="mx-auto mt-14 grid max-w-3xl grid-cols-1 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10 sm:grid-cols-3 lg:mx-0 lg:max-w-2xl">
+          <div className="mx-auto mt-14 grid max-w-xl grid-cols-2 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10 lg:mx-0">
             <div className="bg-primary-900 px-6 py-5">
               <p className="text-2xl font-black text-white">
                 {new Date().getFullYear() - companyInfo.founded}+
               </p>
               <p className="mt-1 text-xs font-medium uppercase tracking-wide text-primary-300">
                 Godina iskustva
-              </p>
-            </div>
-            <div className="bg-primary-900 px-6 py-5">
-              <p className="text-2xl font-black text-white">
-                {companyInfo.rating}
-                <span className="text-primary-400">/5</span>
-              </p>
-              <p className="mt-1 text-xs font-medium uppercase tracking-wide text-primary-300">
-                {companyInfo.reviewsCount} recenzija
               </p>
             </div>
             <div className="bg-primary-900 px-6 py-5">
