@@ -50,18 +50,18 @@ export default function HomePage() {
           style={{ background: "radial-gradient(circle, #dc2626 0%, transparent 70%)" }}
         />
 
-        <div className="relative mx-auto max-w-6xl px-4 text-center lg:max-w-none lg:pr-[38%] lg:text-left">
+        <div className="relative mx-auto max-w-6xl px-4 text-center lg:text-left">
           <span className="inline-flex items-center gap-2 rounded-full border border-accent-500/40 bg-accent-500/10 px-5 py-2 text-sm font-semibold uppercase tracking-wider text-accent-400">
             Stanica za tehnički pregled · Niš
           </span>
 
-          <h1 className="mx-auto mt-7 max-w-4xl text-6xl font-black leading-[1.03] tracking-tight sm:text-7xl lg:mx-0">
+          <h1 className="mx-auto mt-7 max-w-4xl text-6xl font-black leading-[1.03] tracking-tight sm:text-7xl lg:mx-0 lg:max-w-xl lg:text-5xl">
             Tehnički pregled i servis
             <br />
             <span className="text-accent-500">kojem Niš veruje.</span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-xl text-primary-200 lg:mx-0">
+          <p className="mx-auto mt-6 max-w-2xl text-xl text-primary-200 lg:mx-0 lg:max-w-md">
             Brzo, stručno i bez čekanja — vaše vozilo u pouzdanim rukama.
           </p>
 
@@ -80,7 +80,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="mx-auto mt-14 grid max-w-3xl grid-cols-1 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10 sm:grid-cols-3 lg:mx-0">
+          <div className="mx-auto mt-14 grid max-w-3xl grid-cols-1 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10 sm:grid-cols-3 lg:mx-0 lg:max-w-xl">
             <div className="bg-primary-900 px-6 py-5">
               <p className="text-2xl font-black text-white">
                 {new Date().getFullYear() - companyInfo.founded}+
@@ -107,8 +107,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <Testimonials />
 
       <section className="mx-auto max-w-6xl px-4 py-16">
         <div className="flex flex-wrap items-end justify-between gap-4">
@@ -172,6 +170,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <Testimonials />
     </div>
   );
 }
