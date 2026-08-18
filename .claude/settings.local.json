@@ -9,7 +9,10 @@
       "Bash(rm -rf src/app/usluge/tehnicki-pregled src/app/usluge/auto-servis)",
       "Bash(mkdir -p \"src/app/usluge/[slug]\" src/app/zakazivanje)",
       "WebSearch",
-      "mcp__d642b428-9ef5-45f3-ad7f-7cd2a17a6f4f__search_threads"
+      "mcp__d642b428-9ef5-45f3-ad7f-7cd2a17a6f4f__search_threads",
+      "Read(//c/Users/Goca/AppData/Local/Temp/**)",
+      "Read(//c/Users/Goca/AppData/Roaming/Claude/**)",
+      "Bash(find /c/Users/Goca/Downloads /c/Users/Goca/Desktop /c/Users/Goca/Pictures -maxdepth 2 -newermt \"2026-08-18 18:00\" \\\\\\( -iname \"*.jpg\" -o -iname \"*.jpeg\" -o -iname \"*.png\" \\\\\\) 2>/dev/null)"
     ]
   }
 }

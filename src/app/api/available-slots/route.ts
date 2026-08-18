@@ -7,6 +7,7 @@ const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const date = searchParams.get("date");
+  const excludeId = searchParams.get("excludeId");
 
   if (!date || !DATE_PATTERN.test(date)) {
     return NextResponse.json({ error: "Nevažeći datum." }, { status: 400 });
@@ -15,10 +16,15 @@ export async function GET(request: Request) {
   try {
     await ensureSchema();
 
-    const { rows } = await pool.query<{ booking_time: string }>(
-      `SELECT booking_time FROM bookings WHERE booking_date = $1 AND status != 'cancelled'`,
-      [date]
-    );
+    const { rows } = excludeId
+      ? await pool.query<{ booking_time: string }>(
+          `SELECT booking_time FROM bookings WHERE booking_date = $1 AND status != 'cancelled' AND id != $2`,
+          [date, Number(excludeId)]
+        )
+      : await pool.query<{ booking_time: string }>(
+          `SELECT booking_time FROM bookings WHERE booking_date = $1 AND status != 'cancelled'`,
+          [date]
+        );
     const takenTimes = new Set(rows.map((r) => r.booking_time));
 
     const slots = timeSlots.map((time) => ({

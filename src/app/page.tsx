@@ -7,6 +7,23 @@ export default function HomePage() {
   return (
     <div>
       <section className="relative overflow-hidden bg-primary-900 py-24 text-white sm:py-28">
+        <img
+          src="/images/fasada-nocu.png"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-40"
+          style={{
+            objectPosition: "center 25%",
+            filter: "grayscale(65%) brightness(0.6) contrast(1.15)",
+          }}
+        />
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(15,23,42,0.88) 0%, rgba(15,23,42,0.75) 40%, rgba(15,23,42,0.93) 100%)",
+          }}
+        />
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.07]"
           style={{

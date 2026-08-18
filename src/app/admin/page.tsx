@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { timeSlots } from "@/lib/data";
+
+type Slot = { time: string; available: boolean };
 
 type Booking = {
   id: number;
@@ -31,6 +32,8 @@ export default function AdminPage() {
   const [newTime, setNewTime] = useState("");
   const [actionError, setActionError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<number | null>(null);
+  const [rescheduleSlots, setRescheduleSlots] = useState<Slot[]>([]);
+  const [loadingSlots, setLoadingSlots] = useState(false);
 
   const loadBookings = async () => {
     setLoading(true);
@@ -55,6 +58,29 @@ export default function AdminPage() {
     loadBookings();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (!rescheduleId || !newDate) {
+      setRescheduleSlots([]);
+      return;
+    }
+    let cancelled = false;
+    setLoadingSlots(true);
+    fetch(`/api/available-slots?date=${newDate}&excludeId=${rescheduleId}`)
+      .then((res) => (res.ok ? res.json() : Promise.reject()))
+      .then((data) => {
+        if (!cancelled) setRescheduleSlots(data.slots ?? []);
+      })
+      .catch(() => {
+        if (!cancelled) setRescheduleSlots([]);
+      })
+      .finally(() => {
+        if (!cancelled) setLoadingSlots(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [rescheduleId, newDate]);
 
   const handleLogout = async () => {
     await fetch("/api/admin/logout", { method: "POST" });
@@ -255,20 +281,37 @@ export default function AdminPage() {
               />
             </label>
 
-            <label className="mt-4 block text-sm font-semibold text-primary-900">
-              Novo vreme
-              <select
-                value={newTime}
-                onChange={(e) => setNewTime(e.target.value)}
-                className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
-              >
-                {timeSlots.map((slot) => (
-                  <option key={slot} value={slot}>
-                    {slot}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <div className="mt-4">
+              <p className="mb-1 block text-sm font-semibold text-primary-900">Novo vreme</p>
+              {loadingSlots ? (
+                <p className="rounded-md border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-500">
+                  Provera slobodnih termina...
+                </p>
+              ) : (
+                <div className="flex flex-wrap gap-2">
+                  {rescheduleSlots.map((slot) => (
+                    <button
+                      key={slot.time}
+                      type="button"
+                      disabled={!slot.available}
+                      onClick={() => setNewTime(slot.time)}
+                      className={`rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
+                        !slot.available
+                          ? "cursor-not-allowed bg-gray-100 text-gray-400 line-through"
+                          : newTime === slot.time
+                          ? "bg-accent-500 text-white"
+                          : "bg-primary-50 text-primary-800 hover:bg-primary-100"
+                      }`}
+                    >
+                      {slot.time}
+                    </button>
+                  ))}
+                </div>
+              )}
+              <p className="mt-2 text-xs text-gray-400">
+                Precrtano = termin je već zauzet tog dana.
+              </p>
+            </div>
 
             <div className="mt-6 flex gap-3">
               <button
@@ -281,7 +324,10 @@ export default function AdminPage() {
               <button
                 type="button"
                 onClick={submitReschedule}
-                disabled={busyId === rescheduleId}
+                disabled={
+                  busyId === rescheduleId ||
+                  !rescheduleSlots.some((s) => s.time === newTime && s.available)
+                }
                 className="flex-1 rounded-md bg-accent-500 px-4 py-2 text-sm font-bold text-white hover:bg-accent-600 disabled:opacity-60"
               >
                 Sačuvaj
