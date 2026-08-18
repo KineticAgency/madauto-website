@@ -36,6 +36,16 @@ export default function HomePage() {
             className="absolute inset-0"
             style={{ background: "rgba(220,38,38,0.1)", mixBlendMode: "color" }}
           />
+          <div
+            className="absolute inset-x-0 bottom-0 h-[40%]"
+            style={{
+              backdropFilter: "blur(18px)",
+              WebkitBackdropFilter: "blur(18px)",
+              background: "rgba(15,23,42,0.55)",
+              maskImage: "linear-gradient(180deg, transparent 0%, black 35%)",
+              WebkitMaskImage: "linear-gradient(180deg, transparent 0%, black 35%)",
+            }}
+          />
         </div>
 
         <div
@@ -55,13 +65,13 @@ export default function HomePage() {
             Stanica za tehnički pregled · Niš
           </span>
 
-          <h1 className="mx-auto mt-7 max-w-4xl text-6xl font-black leading-[1.03] tracking-tight sm:text-7xl lg:mx-0 lg:max-w-xl lg:text-5xl">
+          <h1 className="mx-auto mt-7 max-w-4xl text-6xl font-black leading-[1.03] tracking-tight sm:text-7xl lg:mx-0 lg:max-w-2xl lg:whitespace-nowrap lg:text-6xl xl:text-7xl">
             Tehnički pregled i servis
             <br />
             <span className="text-accent-500">kojem Niš veruje.</span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-xl text-primary-200 lg:mx-0 lg:max-w-md">
+          <p className="mx-auto mt-6 max-w-2xl text-xl text-primary-200 lg:mx-0">
             Brzo, stručno i bez čekanja — vaše vozilo u pouzdanim rukama.
           </p>
 
@@ -80,7 +90,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="mx-auto mt-14 grid max-w-3xl grid-cols-1 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10 sm:grid-cols-3 lg:mx-0 lg:max-w-xl">
+          <div className="mx-auto mt-14 grid max-w-3xl grid-cols-1 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10 sm:grid-cols-3 lg:mx-0 lg:max-w-2xl">
             <div className="bg-primary-900 px-6 py-5">
               <p className="text-2xl font-black text-white">
                 {new Date().getFullYear() - companyInfo.founded}+
