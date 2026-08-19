@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ServiceCard from "@/components/ServiceCard";
 import Testimonials from "@/components/Testimonials";
-import { companyInfo, services, workingHours } from "@/lib/data";
+import { companyInfo, services } from "@/lib/data";
 
 export default function HomePage() {
   return (
@@ -130,15 +130,26 @@ export default function HomePage() {
       <section className="bg-primary-50">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:grid-cols-2">
           <div>
-            <h2 className="text-2xl font-bold text-primary-900">Radno vreme</h2>
-            <ul className="mt-4 space-y-2 text-sm">
-              {workingHours.map((row) => (
-                <li key={row.day} className="flex justify-between border-b border-primary-100 py-2">
-                  <span className="text-primary-800">{row.day}</span>
-                  <span className="font-medium text-primary-600">{row.hours}</span>
-                </li>
-              ))}
-            </ul>
+            <h2 className="text-2xl font-bold text-primary-900">Gde se nalazimo</h2>
+            <div className="mt-4 overflow-hidden rounded-lg border border-primary-100">
+              <iframe
+                title="Lokacija MADAuto na mapi"
+                src={companyInfo.mapsEmbedSrc}
+                width="100%"
+                height="260"
+                style={{ border: 0, display: "block" }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+              <a
+                href={companyInfo.mapsLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block bg-white px-4 py-2.5 text-center text-sm font-semibold text-primary-700 hover:bg-primary-50"
+              >
+                Otvori u Google Maps →
+              </a>
+            </div>
           </div>
 
           <div>
