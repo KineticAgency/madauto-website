@@ -1,52 +1,14 @@
 import Link from "next/link";
 import ServiceCard from "@/components/ServiceCard";
 import Testimonials from "@/components/Testimonials";
+import HeroBackground from "@/components/HeroBackground";
 import { companyInfo, services } from "@/lib/data";
 
 export default function HomePage() {
   return (
     <div>
       <section className="relative overflow-hidden bg-primary-900 py-24 text-white sm:py-28">
-        <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[46%] xl:block">
-          <img
-            src="/images/fasada-nocu.png"
-            alt=""
-            aria-hidden="true"
-            className="h-full w-full object-cover"
-            style={{
-              objectPosition: "75% 20%",
-              filter: "grayscale(10%) brightness(1.25) contrast(1.25) saturate(1.35)",
-            }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(90deg, #0f172a 0%, rgba(15,23,42,0.95) 10%, rgba(15,23,42,0.82) 20%, rgba(15,23,42,0.62) 32%, rgba(15,23,42,0.4) 44%, rgba(15,23,42,0.2) 56%, rgba(15,23,42,0.06) 68%, transparent 80%)",
-            }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(15,23,42,0.05) 0%, transparent 20%, transparent 70%, rgba(15,23,42,0.75) 100%)",
-            }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{ background: "rgba(220,38,38,0.1)", mixBlendMode: "color" }}
-          />
-          <div
-            className="absolute inset-x-0 bottom-0 h-[40%]"
-            style={{
-              background: "#dc2626",
-              mixBlendMode: "hue",
-              opacity: 0.85,
-              maskImage: "linear-gradient(180deg, transparent 0%, black 40%)",
-              WebkitMaskImage: "linear-gradient(180deg, transparent 0%, black 40%)",
-            }}
-          />
-        </div>
+        <HeroBackground />
 
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.07]"
