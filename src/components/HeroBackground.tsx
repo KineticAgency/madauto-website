@@ -50,7 +50,7 @@ export default function HeroBackground() {
     <div ref={sectionRef} className="pointer-events-none absolute inset-0">
       <div
         ref={wrapperRef}
-        className="absolute -top-12 -bottom-12 right-0 hidden w-[46%] xl:block"
+        className="absolute -top-12 -bottom-12 right-0 hidden lg:block lg:w-[40%] xl:w-[46%]"
         style={{ willChange: "transform" }}
       >
         <img

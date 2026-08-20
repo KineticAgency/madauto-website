@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { Manrope, Sora } from "next/font/google";
+import { Manrope, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const sora = Sora({
+const playfair = Playfair_Display({
   subsets: ["latin", "latin-ext"],
   variable: "--font-display",
-  weight: ["600", "700", "800"],
+  weight: ["600", "700", "800", "900"],
+  style: ["normal", "italic"],
 });
 
 const manrope = Manrope({
@@ -28,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="sr" className={`${sora.variable} ${manrope.variable}`}>
+    <html lang="sr" className={`${playfair.variable} ${manrope.variable}`}>
       <body className="flex min-h-screen flex-col bg-white font-sans antialiased">
         <Header />
         <main className="flex-1">{children}</main>

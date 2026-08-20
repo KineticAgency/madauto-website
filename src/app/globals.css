@@ -18,3 +18,34 @@ h3 {
   font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
   letter-spacing: -0.01em;
 }
+
+@keyframes drive-by {
+  0% {
+    transform: translateX(115vw);
+    opacity: 0;
+  }
+  3% {
+    opacity: 1;
+  }
+  22% {
+    transform: translateX(-130vw);
+    opacity: 1;
+  }
+  24%,
+  100% {
+    transform: translateX(-130vw);
+    opacity: 0;
+  }
+}
+
+.animate-drive-by {
+  animation: drive-by 9s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  animation-delay: 2.5s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-drive-by {
+    animation: none;
+    display: none;
+  }
+}

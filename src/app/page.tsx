@@ -2,6 +2,7 @@ import Link from "next/link";
 import ServiceCard from "@/components/ServiceCard";
 import Testimonials from "@/components/Testimonials";
 import HeroBackground from "@/components/HeroBackground";
+import DriveByCar from "@/components/DriveByCar";
 import { companyInfo, services } from "@/lib/data";
 
 export default function HomePage() {
@@ -21,13 +22,14 @@ export default function HomePage() {
           className="pointer-events-none absolute left-1/4 top-0 h-[520px] w-[900px] -translate-x-1/2 -translate-y-1/3 rounded-full opacity-30 blur-3xl"
           style={{ background: "radial-gradient(circle, #dc2626 0%, transparent 70%)" }}
         />
+        <DriveByCar />
 
         <div className="relative mx-auto max-w-6xl px-4 text-center lg:text-left">
           <span className="inline-flex items-center gap-2 rounded-full border border-accent-500/40 bg-accent-500/10 px-5 py-2 text-sm font-semibold uppercase tracking-wider text-accent-400">
             Stanica za tehnički pregled · Niš
           </span>
 
-          <h1 className="mx-auto mt-7 max-w-4xl text-6xl font-black leading-[1.35] tracking-tight sm:text-7xl lg:mx-0 lg:max-w-2xl lg:whitespace-nowrap lg:text-4xl lg:leading-[1.4] xl:text-5xl xl:leading-[1.4]">
+          <h1 className="mx-auto mt-7 max-w-4xl text-6xl font-black leading-[1.35] tracking-tight sm:text-7xl lg:mx-0 lg:max-w-xl lg:text-4xl lg:leading-[1.4] xl:max-w-2xl xl:text-5xl xl:leading-[1.4]">
             Tehnički pregled i servis
             <br />
             <span className="text-accent-500">kojem Niš veruje.</span>
