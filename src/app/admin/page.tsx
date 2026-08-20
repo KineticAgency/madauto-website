@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { services } from "@/lib/data";
 
 type Slot = { time: string; available: boolean };
 
@@ -16,6 +17,7 @@ type Booking = {
   notes: string | null;
   status: string;
   source: string;
+  service: string | null;
   created_at: string;
 };
 
@@ -66,6 +68,7 @@ export default function AdminPage() {
   const [addSlots, setAddSlots] = useState<Slot[]>([]);
   const [loadingAddSlots, setLoadingAddSlots] = useState(false);
   const [addSource, setAddSource] = useState<"telefon" | "licno">("telefon");
+  const [addService, setAddService] = useState("");
   const [addVehicleType, setAddVehicleType] = useState("");
   const [addFullName, setAddFullName] = useState("");
   const [addPhone, setAddPhone] = useState("");
@@ -208,6 +211,7 @@ export default function AdminPage() {
     setAddTime("");
     setAddSlots([]);
     setAddSource("telefon");
+    setAddService("");
     setAddVehicleType("");
     setAddFullName("");
     setAddPhone("");
@@ -237,6 +241,7 @@ export default function AdminPage() {
           email: addEmail,
           notes: addNotes,
           source: addSource,
+          service: addService,
         }),
       });
       const data = await res.json().catch(() => ({}));
@@ -309,7 +314,7 @@ export default function AdminPage() {
       ) : (
         <>
           <div className="mt-8 overflow-x-auto rounded-lg border border-primary-100">
-            <table className="w-full min-w-[900px] border-collapse text-left text-sm">
+            <table className="w-full min-w-[1000px] border-collapse text-left text-sm">
               <thead>
                 <tr className="bg-primary-900 text-white">
                   <th className="p-3 font-semibold">Način</th>
@@ -318,6 +323,7 @@ export default function AdminPage() {
                   <th className="p-3 font-semibold">Klijent</th>
                   <th className="p-3 font-semibold">Telefon</th>
                   <th className="p-3 font-semibold">Email</th>
+                  <th className="p-3 font-semibold">Usluga</th>
                   <th className="p-3 font-semibold">Vozilo</th>
                   <th className="p-3 font-semibold">Napomena</th>
                   <th className="p-3 font-semibold">Akcije</th>
@@ -326,7 +332,7 @@ export default function AdminPage() {
               <tbody>
                 {activeBookings.length === 0 && (
                   <tr>
-                    <td colSpan={9} className="p-6 text-center text-gray-500">
+                    <td colSpan={10} className="p-6 text-center text-gray-500">
                       Nema zakazanih termina.
                     </td>
                   </tr>
@@ -353,6 +359,7 @@ export default function AdminPage() {
                         <span className="text-gray-400">—</span>
                       )}
                     </td>
+                    <td className="p-3">{b.service ?? <span className="text-gray-400">—</span>}</td>
                     <td className="p-3">{b.vehicle_type}</td>
                     <td className="max-w-[180px] truncate p-3 text-gray-500" title={b.notes ?? ""}>
                       {b.notes || "—"}
@@ -562,6 +569,22 @@ export default function AdminPage() {
                 </div>
               )}
             </div>
+
+            <label className="mt-4 block text-sm font-semibold text-primary-900">
+              Usluga
+              <select
+                value={addService}
+                onChange={(e) => setAddService(e.target.value)}
+                className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
+              >
+                <option value="">Izaberite uslugu</option>
+                {services.map((s) => (
+                  <option key={s.slug} value={s.title}>
+                    {s.title}
+                  </option>
+                ))}
+              </select>
+            </label>
 
             <label className="mt-4 block text-sm font-semibold text-primary-900">
               Tip vozila

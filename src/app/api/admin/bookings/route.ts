@@ -25,7 +25,7 @@ export async function GET(request: Request) {
   await ensureSchema();
   const { rows } = await pool.query(
     `SELECT id, TO_CHAR(booking_date, 'YYYY-MM-DD') AS booking_date, booking_time,
-            vehicle_type, full_name, phone, email, notes, status, source, created_at
+            vehicle_type, full_name, phone, email, notes, status, source, service, created_at
      FROM bookings
      ORDER BY booking_date ASC, booking_time ASC`
   );
@@ -48,6 +48,7 @@ export async function POST(request: Request) {
   const email = typeof body?.email === "string" ? body.email.trim() : "";
   const notes = typeof body?.notes === "string" ? body.notes : "";
   const source = VALID_SOURCES.includes(body?.source) ? body.source : null;
+  const service = typeof body?.service === "string" ? body.service.trim() : "";
 
   if (!date || !timeSlot || !vehicleType || !fullName || !phone || !source) {
     return NextResponse.json({ error: "Nedostaju obavezna polja." }, { status: 400 });
@@ -57,9 +58,9 @@ export async function POST(request: Request) {
 
   try {
     await pool.query(
-      `INSERT INTO bookings (booking_date, booking_time, vehicle_type, full_name, phone, email, notes, source)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
-      [date, timeSlot, vehicleType, fullName, phone, email || null, notes, source]
+      `INSERT INTO bookings (booking_date, booking_time, vehicle_type, full_name, phone, email, notes, source, service)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
+      [date, timeSlot, vehicleType, fullName, phone, email || null, notes, source, service || null]
     );
   } catch (error) {
     const pgError = error as { code?: string };

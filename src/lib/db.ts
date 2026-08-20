@@ -38,6 +38,7 @@ export function ensureSchema() {
       );
       ALTER TABLE bookings ALTER COLUMN email DROP NOT NULL;
       ALTER TABLE bookings ADD COLUMN IF NOT EXISTS source TEXT NOT NULL DEFAULT 'online';
+      ALTER TABLE bookings ADD COLUMN IF NOT EXISTS service TEXT;
     `
       )
       .then(() => undefined);
