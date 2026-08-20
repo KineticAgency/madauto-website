@@ -25,11 +25,55 @@ export async function GET(request: Request) {
   await ensureSchema();
   const { rows } = await pool.query(
     `SELECT id, TO_CHAR(booking_date, 'YYYY-MM-DD') AS booking_date, booking_time,
-            vehicle_type, full_name, phone, email, notes, status, created_at
+            vehicle_type, full_name, phone, email, notes, status, source, created_at
      FROM bookings
      ORDER BY booking_date ASC, booking_time ASC`
   );
   return NextResponse.json({ bookings: rows });
+}
+
+const VALID_SOURCES = ["telefon", "licno"];
+
+export async function POST(request: Request) {
+  if (!(await requireAdmin(request))) {
+    return NextResponse.json({ error: "Neautorizovano." }, { status: 401 });
+  }
+
+  const body = await request.json().catch(() => null);
+  const date = typeof body?.date === "string" ? body.date : "";
+  const timeSlot = typeof body?.timeSlot === "string" ? body.timeSlot : "";
+  const vehicleType = typeof body?.vehicleType === "string" ? body.vehicleType : "";
+  const fullName = typeof body?.fullName === "string" ? body.fullName.trim() : "";
+  const phone = typeof body?.phone === "string" ? body.phone.trim() : "";
+  const email = typeof body?.email === "string" ? body.email.trim() : "";
+  const notes = typeof body?.notes === "string" ? body.notes : "";
+  const source = VALID_SOURCES.includes(body?.source) ? body.source : null;
+
+  if (!date || !timeSlot || !vehicleType || !fullName || !phone || !source) {
+    return NextResponse.json({ error: "Nedostaju obavezna polja." }, { status: 400 });
+  }
+
+  await ensureSchema();
+
+  try {
+    await pool.query(
+      `INSERT INTO bookings (booking_date, booking_time, vehicle_type, full_name, phone, email, notes, source)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+      [date, timeSlot, vehicleType, fullName, phone, email || null, notes, source]
+    );
+  } catch (error) {
+    const pgError = error as { code?: string };
+    if (pgError.code === "23505") {
+      return NextResponse.json(
+        { error: "Taj termin je već zauzet. Izaberite drugi." },
+        { status: 409 }
+      );
+    }
+    console.error("Greška pri ručnom upisu termina:", error);
+    return NextResponse.json({ error: "Upis termina nije uspeo." }, { status: 502 });
+  }
+
+  return NextResponse.json({ ok: true });
 }
 
 export async function PATCH(request: Request) {
@@ -64,7 +108,7 @@ export async function PATCH(request: Request) {
   if (action === "cancel") {
     await pool.query(`UPDATE bookings SET status = 'cancelled' WHERE id = $1`, [id]);
 
-    if (resend) {
+    if (resend && existing.email) {
       await resend.emails
         .send({
           from: fromAddress,
@@ -109,7 +153,7 @@ export async function PATCH(request: Request) {
     return NextResponse.json({ error: "Pomeranje termina nije uspelo." }, { status: 502 });
   }
 
-  if (resend) {
+  if (resend && existing.email) {
     await resend.emails
       .send({
         from: fromAddress,

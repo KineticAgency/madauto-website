@@ -42,8 +42,8 @@ export async function POST(request: Request) {
   try {
     await ensureSchema();
     await pool.query(
-      `INSERT INTO bookings (booking_date, booking_time, vehicle_type, full_name, phone, email, notes)
-       VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+      `INSERT INTO bookings (booking_date, booking_time, vehicle_type, full_name, phone, email, notes, source)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, 'online')`,
       [body.date, body.timeSlot, body.vehicleType, body.fullName, body.phone, body.email, body.notes ?? ""]
     );
   } catch (error) {
