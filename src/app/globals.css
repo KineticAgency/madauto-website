@@ -24,14 +24,14 @@ h3 {
     transform: translateX(115vw);
     opacity: 0;
   }
-  3% {
+  4% {
     opacity: 1;
   }
-  22% {
+  55% {
     transform: translateX(-130vw);
     opacity: 1;
   }
-  24%,
+  58%,
   100% {
     transform: translateX(-130vw);
     opacity: 0;
@@ -39,7 +39,7 @@ h3 {
 }
 
 .animate-drive-by {
-  animation: drive-by 9s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  animation: drive-by 16s linear infinite;
   animation-delay: 2.5s;
 }
 

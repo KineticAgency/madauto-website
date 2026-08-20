@@ -1,13 +1,10 @@
 export default function DriveByCar() {
   return (
     <div
-      className="pointer-events-none absolute left-0 top-[64%] z-[3] hidden -translate-y-1/2 sm:block"
+      className="pointer-events-none absolute inset-x-0 bottom-2 z-[3] hidden sm:block"
       aria-hidden="true"
     >
-      <svg
-        viewBox="0 0 240 70"
-        className="animate-drive-by h-10 w-auto sm:h-12"
-      >
+      <svg viewBox="0 0 240 70" className="animate-drive-by h-16 w-auto sm:h-20 lg:h-24">
         <g stroke="#f87171" strokeWidth="3" strokeLinecap="round" opacity="0.55">
           <line x1="198" y1="28" x2="235" y2="28" />
           <line x1="203" y1="38" x2="245" y2="38" />
